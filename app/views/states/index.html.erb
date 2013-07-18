@@ -1,29 +1,62 @@
+<div ng-controller="StatesController">
 <h1>Listing states</h1>
-
-<table>
+<table class="table data-table">
   <thead>
     <tr>
       <th>Name</th>
       <th>Abreviation</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Action</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @states.each do |state| %>
-      <tr>
-        <td><%= state.name %></td>
-        <td><%= state.abreviation %></td>
-        <td><%= link_to 'Show', state %></td>
-        <td><%= link_to 'Edit', edit_state_path(state) %></td>
-        <td><%= link_to 'Destroy', state, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+      <tr ng-mouseover="showInfo()" ng-mouseout="hideInfo()" ng-repeat="state in items">
+        <td>{{ state.name }}</td>
+        <td>{{ state.abreviation }}</td>
+        <td><span class="icon-edit" ng-click="editThis()"></span></td>   
+   </tr>
   </tbody>
 </table>
-
 <br>
 
-<%= link_to 'New State', new_state_path %>
+<div ng-repeat="state in items" modal="modal().shouldBeOpen()" close="modal.close()" options="modal().opts">
+ <div class="modal-header center">
+  <h3>State Description</h3>
+ </div>
+ <div class="modal-body justify">
+    {{ state.description }}
+ </div>
+ <div class="modal-footer">
+   <button class="btn btn-warning cancel" ng-click="modal().close()">Cancel</button>
+ </div>
+</div>
+
+<div modal="modalCreate.shouldBeOpen()" close="modalCreate.close()" options="modalCreate.opts">
+ <div class="modal-header center">
+  <h3>Create State</h3>
+ </div>
+ <div class="modal-body justify">
+   <form class="simple-form"> 
+    <div class="field">
+     <label>Name:</label>
+     <input type="text" ng-model="state.name">
+    </div>
+    <div class="field">
+      <label>Abreviation:</label>
+      <input type="text" ng-model="state.abreviation">
+    </div>
+    <div class="field">
+        <label>Description:</label>
+        <input type="text" ng-model="state.description">
+    </div>
+  
+   </form>
+ </div>
+ <div class="modal-footer">
+   <button class="btn btn-save" ng-click="create(state)">Save</button>
+   <button class="btn btn-warning cancel" ng-click="modalCreate.close()">Cancel</button>
+ </div>
+</div>
+
+
+</div>

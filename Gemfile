@@ -5,6 +5,10 @@ gem 'rails', '4.0.0'
 gem 'devise', '3.0.0.rc'
 gem "cancan"
 gem 'bootstrap-sass'
+gem 'angularjs-rails'
+gem 'angularjs-rails-resource', '~> 0.2.0'
+gem 'angular-ui-rails'
+gem 'angular-ui-bootstrap-rails'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

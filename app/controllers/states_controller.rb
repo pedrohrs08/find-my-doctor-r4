@@ -1,6 +1,5 @@
 class StatesController < ApplicationController
   before_action :set_state, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new]
 
   # GET /states
   # GET /states.json
@@ -70,6 +69,6 @@ class StatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def state_params
-      params.require(:state).permit(:name, :abreviation)
+      params.require(:state).permit(:name, :abreviation, :description)
     end
 end

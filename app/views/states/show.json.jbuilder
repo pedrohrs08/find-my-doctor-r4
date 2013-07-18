@@ -1,1 +1,1 @@
-json.extract! @state, :name, :abreviation, :created_at, :updated_at
+json.extract! @state, :id, :name, :abreviation, :created_at, :description, :updated_at

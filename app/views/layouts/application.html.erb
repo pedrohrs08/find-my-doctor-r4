@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="FindMyDoctorApp">
 <head>
   <title>FindMyDoctorR4</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
@@ -7,9 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
-<div id="loading" /> Loading... </div>
+<%= render "shared/header" %>
+<div class="container">
+    {{ 'testing angular' + '!' }}
+	<%= yield %>
+	<div id="loading" /> Loading... </div>
+	<div id="footer" /><%= render "shared/footer" %></div>
+</div>
 </body>
 </html>
