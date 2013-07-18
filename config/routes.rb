@@ -2,6 +2,12 @@ FindMyDoctorR4::Application.routes.draw do
   devise_for :users
   resources :states
 
+  scope :api do
+    get "/states(.:format)" => "states#index"
+    get "/states/:id" => "states#show"
+    post "/states(.:format)" => "states#create"
+    put "/states/:id" => "states#update"
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

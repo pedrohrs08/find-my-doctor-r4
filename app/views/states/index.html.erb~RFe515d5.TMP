@@ -1,0 +1,38 @@
+<div ng-controller="StatesController">
+
+<h1>Listing states</h1>
+<table class="table data-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Abreviation</th>
+      <th>Composition</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr ng-click="open()" g-mouseover="showInfo()" ng-mouseout="hideInfo()" ng-repeat="state in items">
+        <td>{{ state.name }}</td>
+        <td>{{ state.abreviation }}</td>
+        <td><span ng-show="isToShowInfo()">{{ state.name + ' - ' + state.abreviation }}</span></td>
+        <div modal="shouldBeOpen" close="close()" options="opts">
+          <div class="modal-header">
+              <h3>State Description</h3>
+          </div>
+          <div class="modal-body">
+              <ul>
+                  <li>{{state.description}}</li>
+              </ul>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-warning cancel" ng-click="close()">Cancel</button>
+          </div>
+        </div>
+      </tr>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New State', new_state_path %>
+</div>
