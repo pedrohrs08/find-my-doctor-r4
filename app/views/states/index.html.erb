@@ -5,7 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Abreviation</th>
-      <th>Action</th>
+      <th><i class="icon-plus" ></i><a ng-click="openForm()" />New State</a></th>
     </tr>
   </thead>
 
@@ -33,28 +33,40 @@
 
 <div modal="modalCreate.shouldBeOpen()" close="modalCreate.close()" options="modalCreate.opts">
  <div class="modal-header center">
-  <h3>Create State</h3>
+  <h3>{{ action }} State</h3><br />
+  <span ng-show="state != null"><span class="alert alert-info"><i class="icon-info-sign"></i><b>State Id: </b>{{ state.id }}</span><br/>
+  </span>
+
  </div>
- <div class="modal-body justify">
-   <form class="simple-form"> 
-    <div class="field">
-     <label>Name:</label>
-     <input type="text" ng-model="state.name">
+ <div class="modal-body">
+   <form class="form-horizontal" name="myForm" > 
+    <div class="control-group field" ng-class="{'alert alert-error':errors.name}">
+     <label class="control-label">Name:</label>
+     <div class="controls" > 
+         <input type="text" ng-model="state.name" required>
+         <span ng-repeat="error in errors.name">{{ error }}</span>
+     </div>
     </div>
-    <div class="field">
-      <label>Abreviation:</label>
-      <input type="text" ng-model="state.abreviation">
+    <div class="control-group field" ng-class="{'alert alert-error':errors.abreviation}">
+      <label class="control-label">Abreviation:</label>
+      <div class="controls">
+        <input type="text" ng-model="state.abreviation" required>
+        <span ng-repeat="error in errors.abreviation">{{ error }}</span>
+      </div>
     </div>
-    <div class="field">
-        <label>Description:</label>
-        <input type="text" ng-model="state.description">
+    <div class="control-group field">
+      <div class="controls">
+        <textarea placeholder="Description" ng-model="state.description"></textarea>
+      </div>
     </div>
   
    </form>
  </div>
  <div class="modal-footer">
-   <button class="btn btn-save" ng-click="create(state)">Save</button>
-   <button class="btn btn-warning cancel" ng-click="modalCreate.close()">Cancel</button>
+   <button ng-show="state" class="btn-large" ng-click="previous()"><i class="icon-arrow-left"></i></button>
+   <button ng-show="state" class="btn-large" ng-click="next()"><i class="icon-arrow-right"></i></button>
+   <button class="btn-large btn-primary" ng-click="create(state)">Save</button>
+   <button class="btn-large btn-danger cancel" ng-click="modalCreate.close()">Cancel</button>
  </div>
 </div>
 

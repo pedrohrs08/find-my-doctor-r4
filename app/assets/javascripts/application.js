@@ -29,7 +29,7 @@
 var FindMyDoctorApp = angular.module("FindMyDoctorApp",["ngResource","ui.bootstrap"]);
 
 FindMyDoctorApp.factory('State', function($resource) {
-	return $resource('/api/states/:id', { id: '@id'}, { update: { method: 'PUT' } });
+    return $resource('/api/states/:id', { id: '@id'}, { update: { method: 'PUT' } });
 });
 
 FindMyDoctorApp.config([

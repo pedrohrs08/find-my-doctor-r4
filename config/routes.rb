@@ -7,6 +7,8 @@ FindMyDoctorR4::Application.routes.draw do
     get "/states/:id" => "states#show"
     post "/states(.:format)" => "states#create"
     put "/states/:id" => "states#update"
+    get "/states/next/:id" => "states#next"
+    get "/states/previous/:id" => "states#previous"
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
