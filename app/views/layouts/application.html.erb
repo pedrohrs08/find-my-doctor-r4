@@ -9,8 +9,9 @@
 <body>
 <%= render "shared/header" %>
 <div class="container">
-    {{ 'testing angular' + '!' }}
-	<%= yield %>
+    <div class="content" ng-view>
+      
+    </div>
 	<div id="loading" /> Loading... </div>
 	<div id="footer" /><%= render "shared/footer" %></div>
 </div>

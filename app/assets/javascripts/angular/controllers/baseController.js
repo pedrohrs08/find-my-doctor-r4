@@ -3,8 +3,14 @@ function StatesController ($scope, $http, State) {
    $scope.reset = function() {
 		$scope.items = [];
 		$scope.state = null;
-		$scope.errors = [];
-       	$scope.items = State.query()
+       	$scope.items = State.query(function (data, status) {
+        $scope.errors = [];
+        arr_modal = [];
+        for(i in data) {
+       		arr_modal[data[i].id] = new Modal(data[i].id);
+        }
+        $scope.modal_arr = arr_modal;
+	});
    };
    
    $scope.next = function () {
@@ -20,24 +26,10 @@ function StatesController ($scope, $http, State) {
    };
 
    $scope.editThis = function() {
+   	 $scope.action = "Edit";
    	 var id = this.state.id;
-     $scope.state = this.state;
-     $scope.modalCreate.open();
-   };
-
-   $scope.delete = function() {
-     State.delete({id: $scope.state.id}, function (date) {
-        $scope.message.success = "State : " + $scope.state.name + " deleted successfully!";
-        $scope.reset();
-        $scope.modalDelete.close();
-     });
-   }
-
-   $scope.deleteThis = function() {
-     $scope.action = "Edit";
-     var id = this.state.id;
      $scope.state = State.get({ id: id });
-     $scope.modalDelete.open();
+     $scope.modalCreate.open();
    };
 
     $scope.openForm = function () {
@@ -51,7 +43,7 @@ function StatesController ($scope, $http, State) {
         $scope.errors = "Please fill in some information!";
       } else if (state.id == null)	{
     	State.save(state, function(){
-            	$scope.message.success = "State successfully created: " + state.name
+    	
 	            $scope.modalCreate.close();
 	            $scope.reset();
 	        },
@@ -61,19 +53,16 @@ function StatesController ($scope, $http, State) {
 	    );
       } else {      	
       	State.update({ id: state.id }, state, function () {
-            $scope.message.success = "State successfully updated: " + state.name
             $scope.modalCreate.close();
             $scope.reset();
       	});        
       }
     };
 
+    $scope.modal = function () {
+    	return $scope.modal_arr[this.state.id];
+    };
+
 	$scope.reset();
 	$scope.modalCreate = new Modal();
-  $scope.modalDelete = new Modal();
-  $scope.message = {
-    warning: null,
-    success: null,
-    fail: null
-  }
 }

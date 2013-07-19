@@ -1,18 +1,37 @@
 <div ng-controller="StatesController">
   <h1>Listing states</h1>
+    <div ng-show="message.success" class="alert alert-success">
+    <a class="close" ng-click="message.success = []"><i class="icon-remove"></i></a>
+    <p>{{ message.success }}</p>
+  </div>
   <table class="table data-table">
     <thead>
       <tr>
         <th>Name</th>
         <th>Abreviation</th>
-        <th><i class="icon-plus" ></i><a ng-click="openForm()" />New State</a></th>
+        <th>
+          <button class="btn btn-success" ng-click="openForm()" >
+            <i class="icon-plus" ></i>
+            New State
+          </button>
+        </th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-mouseover="showInfo()" ng-mouseout="hideInfo()" ng-repeat="state in items">
+      <tr ng-repeat="state in items">
         <td>{{ state.name }}</td>
         <td>{{ state.abreviation }}</td>
-        <td><span class="icon-edit" ng-click="editThis()"></span></td>   
+        <td>
+          <a class="label label-warning" ng-click="editThis()" >
+            <i class="icon-edit"></i>
+            Edit
+          </a>
+          <span class="divider-verical"></span>  
+          <a class="label label-important" ng-click="deleteThis()" >
+            <i class="icon-trash"></i>
+            Delete
+          </a>
+        </td>   
       </tr>
     </tbody>
   </table>
@@ -63,6 +82,26 @@
        </button>
        <button class="btn-large btn-danger cancel" ng-click="modalCreate.close()">
          Cancel
+       </button>
+    </div>
+  </div>
+  <div modal="modalDelete.shouldBeOpen()" close="modalDelete.close()" options="modalDelete.opts">
+    <div class="modal-header center">
+      <h3>Delete State</h3>
+      <br />
+    </div>
+    <div class="modal-body">
+       Are you sure you want to delete this state?
+       {{ state.name }}
+    </div>
+    <div class="modal-footer">
+       <button ng-show="state" class="btn-success" ng-click="delete()">
+          <i class="icon-ok"></i>
+          YES
+       </button>
+       <button ng-show="state" class="btn-warning" ng-click="modalDelete.close()">
+          <i class="icon-remove"></i>
+           NO
        </button>
     </div>
   </div>
