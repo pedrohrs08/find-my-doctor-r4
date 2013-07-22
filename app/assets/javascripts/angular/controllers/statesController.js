@@ -43,21 +43,7 @@ function StatesController ($scope, State) {
 
 	$scope.hover = 0;
 
-	$scope.opened = 0;
-
-    $scope.modal = function () {
-    	return $scope.modal_arr[this.state.id];
-    };
-
-	$scope.showInfo = function (){
-		$scope.hover = this.state.id;
-	};
-
-	$scope.hideInfo = function (){
-		$scope.hover = 0;
-	};
-
-	$scope.isToShowInfo = function (){
-		return $scope.hover == this.state.id;
-	};
+  $scope.modal = function () {
+   	return $scope.modal_arr[this.state.id];
+  };
 }
