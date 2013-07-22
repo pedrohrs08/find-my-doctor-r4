@@ -17,6 +17,14 @@ class StatesController < ApplicationController
     @state = State.new
   end
 
+  def next
+    @state = State.in_order.where("id > ?",params[:id]).first || State.find(params[:id]);
+  end
+
+  def previous
+    @state = State.in_order.where("id < ?",params[:id]).last || State.find(params[:id]);
+  end
+
   # GET /states/1/edit
   def edit
   end

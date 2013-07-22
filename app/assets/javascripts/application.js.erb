@@ -29,12 +29,20 @@
 var FindMyDoctorApp = angular.module("FindMyDoctorApp",["ngResource","ui.bootstrap"]);
 
 FindMyDoctorApp.factory('State', function($resource) {
-    return $resource('/api/states/:id', { id: '@id'}, { update: { method: 'PUT' } });
+    return $resource('/api/states/:id', { id: '@id'}, { update: { method: 'PUT' }, delete: { method: 'DELETE' } });
 });
 
 FindMyDoctorApp.config([
   "$httpProvider", function($httpProvider) {
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+  }
+]);
+
+FindMyDoctorApp.config([
+  "$routeProvider", function($routeProvider) {
+  	$routeProvider
+  	  .when('/', { controller: StatesController, templateUrl: '<%= asset_path('angular/templates/states.html') %>'})
+  	  .otherwise( { redirect_to: '/'} );
   }
 ]);
 
